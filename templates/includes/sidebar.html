@@ -4,7 +4,7 @@
 {#    <a href="{% url "logout" %}">Logout</a>#}
     <li><a href="{% url "task_manager:index" %}">Home page</a></li>
     <li><a href="{% url "task_manager:workers_list" %}">All workers</a></li>
-{#    <li><a href="{% url "taxi:car-list" %}">Cars</a></li>#}
+    <li><a href="{% url "task_manager:tasks_list" %}">All tasks</a></li>
 {#    <li><a href="{% url "taxi:driver-list" %}">Drivers</a></li>#}
   {% else %}
     <a href="{% url "login" %}">Login</a>

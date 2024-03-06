@@ -20,7 +20,7 @@ class WorkerAdmin(UserAdmin):
                         "last_name",
                         "position",
                     )
-                }
+                },
             )
         )
     )

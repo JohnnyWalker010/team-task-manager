@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from task_manager.models import Worker
+from task_manager.models import Worker, Task
 
 
 class WorkerSearchForm(forms.Form):
@@ -9,11 +9,7 @@ class WorkerSearchForm(forms.Form):
         max_length=255,
         required=False,
         label="",
-        widget=forms.TextInput(
-            attrs={
-                "placeholder": "Search by username"
-            }
-        )
+        widget=forms.TextInput(attrs={"placeholder": "Search by username"}),
     )
 
 
@@ -24,7 +20,7 @@ class WorkerCreateForm(UserCreationForm):
             "position",
             "first_name",
             "last_name",
-            "email"
+            "email",
         )
 
 
@@ -32,3 +28,39 @@ class WorkerUpdateForm(forms.ModelForm):
     class Meta:
         model = Worker
         fields = ["position", "email"]
+
+
+class TaskSearchForm(forms.Form):
+    name = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Search by name"}),
+    )
+
+
+class TaskCreateForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = [
+            "name",
+            "description",
+            "deadline",
+            "priority",
+            "task_type",
+            "assignees_list",
+        ]
+
+
+class TaskUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = [
+            "name",
+            "description",
+            "deadline",
+            "priority",
+            "task_type",
+            "assignees_list",
+        ]
+
