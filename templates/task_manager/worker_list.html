@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+    <h1>Tasks List</h1>
+    <a href="{% url "task_manager:create_task" %}" class="btn btn-success">Add Worker</a>
+    <form method="get" action="" class="form-inline">
+      {{ search_form|crispy }}
+      <input class="btn btn-info" type="submit" value="🔎">
+    </form>
+
+  {% if tasks %}
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Position</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ worker.username }}</td>
+                    <td>{{ worker.get_full_name }}</td>
+                    <td>{{ worker.email }}</td>
+                    <td>{% if worker.position %}{{ worker.position.name }}{% else %}N/A{% endif %}</td>
+                    <td><a href="{% url "task_manager:update_worker" pk=worker.id %}" class="btn btn-info">Update</a></td>
+                    <td><a href="{% url "task_manager:delete_worker" pk=worker.id %}" class="btn btn-danger">Delete</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  {% endif %}
+
+{% endblock %}
