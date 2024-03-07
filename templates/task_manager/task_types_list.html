@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+    <h1>Task types List</h1>
+    <a href="{% url "task_manager:create_task_type" %}" class="btn btn-success">Create task type</a>
+    <form method="get" action="" class="form-inline">
+      {{ search_form|crispy }}
+      <input class="btn btn-info" type="submit" value="🔎">
+    </form>
+
+  {% if task_types %}
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+              <th>Name</th>
+              <th>Number of tasks</th>
+              <th>Update</th>
+              <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task_type in task_types %}
+                <tr>
+                    <td>{{ task_type.name }}</td>
+                    <th>{{ task_type.task_set.count }}</th>
+                    <td><a href="{% url "task_manager:update_task_type" pk=task_type.id %}" class="btn btn-info">Update</a></td>
+                    <td><a href="{% url "task_manager:delete_task_type" pk=task_type.id %}" class="btn btn-danger">Delete</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  {% endif %}
+{% endblock %}

@@ -16,7 +16,8 @@ from task_manager.forms import (
     WorkerUpdateForm,
     TaskSearchForm,
     TaskCreateForm,
-    TaskUpdateForm, PositionSearchForm, PositionCreateForm, PositionUpdateForm,
+    TaskUpdateForm, PositionSearchForm, PositionCreateForm, PositionUpdateForm, TaskTypeSearchForm, TaskTypeCreateForm,
+    TaskTypeUpdateForm,
 )
 from task_manager.models import Worker, Task, TaskType, Position
 
@@ -182,3 +183,48 @@ class PositionDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("task_manager:positions_list")
     template_name = "task_manager/position_delete_form.html"
 
+
+class TaskTypeListView(LoginRequiredMixin, ListView):
+    model = TaskType
+    template_name = "task_manager/task_types_list.html"
+    context_object_name = "task_types"
+    paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        name = self.request.GET.get("name")
+        context["search_form"] = TaskTypeSearchForm(initial={"name": name})
+
+        return context
+
+    def get_queryset(self):
+        queryset = TaskType.objects.all().order_by("name")
+        form = TaskTypeSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(name__icontains=form.cleaned_data["name"])
+
+        return queryset
+
+
+class TaskTypeCreateView(LoginRequiredMixin, CreateView):
+    model = TaskType
+    template_name = "task_manager/task_type_create.html"
+    form_class = TaskTypeCreateForm
+    success_url = reverse_lazy("task_manager:task_type_list")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class TaskTypeUpdateView(LoginRequiredMixin, UpdateView):
+    model = Task
+    form_class = TaskTypeUpdateForm
+    success_url = reverse_lazy("task_manager:positions_list")
+    template_name = "task_manager/task_type_update_form.html"
+
+
+class TaskTypeDeleteView(LoginRequiredMixin, DeleteView):
+    model = TaskType
+    success_url = reverse_lazy("task_manager:positions_list")
+    template_name = "task_manager/task_type_delete_form.html"
