@@ -1,0 +1,162 @@
+[
+  {
+    "model": "task_manager.position",
+    "pk": 1,
+    "fields": {
+      "name": "Developer"
+    }
+  },
+  {
+    "model": "task_manager.position",
+    "pk": 2,
+    "fields": {
+      "name": "Project Manager"
+    }
+  },
+  {
+    "model": "task_manager.worker",
+    "pk": 1,
+    "fields": {
+      "username": "john.doe",
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john.doe@example.com",
+      "position": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "task_manager.worker",
+    "pk": 2,
+    "fields": {
+      "username": "jane.smith",
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "email": "jane.smith@example.com",
+      "position": 2,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "task_manager.tasktype",
+    "pk": 1,
+    "fields": {
+      "name": "Bug Fixing"
+    }
+  },
+  {
+    "model": "task_manager.tasktype",
+    "pk": 2,
+    "fields": {
+      "name": "Feature Development"
+    }
+  },
+  {
+    "model": "task_manager.task",
+    "pk": 1,
+    "fields": {
+      "name": "Fix Login Issue",
+      "description": "Fix the bug causing login issues",
+      "deadline": "2024-03-15",
+      "is_completed": false,
+      "priority": "urgent",
+      "task_type": 1,
+      "assignees_list": [1]
+    }
+  },
+  {
+    "model": "task_manager.task",
+    "pk": 2,
+    "fields": {
+      "name": "Implement User Authentication",
+      "description": "Develop user authentication system",
+      "deadline": "2024-03-25",
+      "is_completed": false,
+      "priority": "high",
+      "task_type": 2,
+      "assignees_list": [1, 2]
+    }
+  },
+  {
+    "model": "task_manager.task",
+    "pk": 3,
+    "fields": {
+      "name": "Create Project Plan",
+      "description": "Outline tasks and milestones for the project",
+      "deadline": "2024-04-01",
+      "is_completed": false,
+      "priority": "ordinary",
+      "task_type": 2,
+      "assignees_list": [2]
+    }
+  },
+  {
+    "model": "task_manager.task",
+    "pk": 4,
+    "fields": {
+      "name": "Optimize Database Queries",
+      "description": "Improve the efficiency of database queries",
+      "deadline": "2024-04-10",
+      "is_completed": false,
+      "priority": "high",
+      "task_type": 2,
+      "assignees_list": [1]
+    }
+  },
+  {
+    "model": "task_manager.tasktype",
+    "pk": 3,
+    "fields": {
+      "name": "Design"
+    }
+  },
+  {
+    "model": "task_manager.tasktype",
+    "pk": 4,
+    "fields": {
+      "name": "Testing"
+    }
+  },
+  {
+    "model": "task_manager.tasktype",
+    "pk": 5,
+    "fields": {
+      "name": "Frontend Development"
+    }
+  },
+  {
+    "model": "task_manager.tasktype",
+    "pk": 6,
+    "fields": {
+      "name": "Backend Development"
+    }
+  },
+  {
+    "model": "task_manager.task",
+    "pk": 5,
+    "fields": {
+      "name": "Code Review",
+      "description": "Review and provide feedback on code changes",
+      "deadline": "2024-04-15",
+      "is_completed": false,
+      "priority": "high",
+      "task_type": 5,
+      "assignees_list": [1, 2]
+    }
+  },
+  {
+    "model": "task_manager.task",
+    "pk": 6,
+    "fields": {
+      "name": "Database Optimization",
+      "description": "Optimize database queries for better performance",
+      "deadline": "2024-04-25",
+      "is_completed": false,
+      "priority": "high",
+      "task_type": 6,
+      "assignees_list": [1, 2]
+    }
+  }
+]
