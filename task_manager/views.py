@@ -3,7 +3,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.views.generic import (
+    ListView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+)
 
 from task_manager.forms import (
     WorkerSearchForm,
@@ -11,7 +16,7 @@ from task_manager.forms import (
     WorkerUpdateForm,
     TaskSearchForm,
     TaskCreateForm,
-    TaskUpdateForm,
+    TaskUpdateForm, PositionSearchForm, PositionCreateForm, PositionUpdateForm,
 )
 from task_manager.models import Worker, Task, TaskType, Position
 
@@ -61,10 +66,14 @@ class WorkerListView(LoginRequiredMixin, ListView):
 
 
 class WorkerCreateView(LoginRequiredMixin, CreateView):
-    model = Worker
+    model = get_user_model()
     form_class = WorkerCreateForm
     success_url = reverse_lazy("task_manager:workers_list")
     template_name = "task_manager/worker_create_form.html"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class WorkerUpdateView(LoginRequiredMixin, UpdateView):
@@ -126,3 +135,50 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     template_name = "task_manager/task_delete_form.html"
     success_url = reverse_lazy("task_manager:tasks_list")
+
+
+class PositionListView(LoginRequiredMixin, ListView):
+    model = Position
+    template_name = "task_manager/position_list.html"
+    context_object_name = "positions"
+    paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        name = self.request.GET.get("name")
+        context["search_form"] = PositionSearchForm(initial={"name": name})
+
+        return context
+
+    def get_queryset(self):
+        queryset = Position.objects.all().order_by("name")
+        form = PositionSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(name__icontains=form.cleaned_data["name"])
+
+        return queryset
+
+
+class PositionCreateView(LoginRequiredMixin, CreateView):
+    model = Position
+    template_name = "task_manager/position_create.html"
+    form_class = PositionCreateForm
+    success_url = reverse_lazy("task_manager:positions_list")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class PositionUpdateView(LoginRequiredMixin, UpdateView):
+    model = Position
+    form_class = PositionUpdateForm
+    success_url = reverse_lazy("task_manager:positions_list")
+    template_name = "task_manager/position_update_form.html"
+
+
+class PositionDeleteView(LoginRequiredMixin, DeleteView):
+    model = Position
+    success_url = reverse_lazy("task_manager:positions_list")
+    template_name = "task_manager/position_delete_form.html"
+

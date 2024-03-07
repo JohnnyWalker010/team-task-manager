@@ -130,4 +130,3 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 LOGIN_URL = "task_manager:login"
 
 LOGIN_REDIRECT_URL = "task_manager:index"
-

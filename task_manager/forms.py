@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from task_manager.models import Worker, Task
+from task_manager.models import Worker, Task, Position
 
 
 class WorkerSearchForm(forms.Form):
@@ -80,3 +80,24 @@ class TaskUpdateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(TaskUpdateForm, self).__init__(*args, **kwargs)
         self.fields["assignees_list"].initial = self.instance.assignees_list.all()
+
+
+class PositionSearchForm(forms.Form):
+    name = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Search by name"}),
+    )
+
+
+class PositionCreateForm(forms.ModelForm):
+    class Meta:
+        model = Position
+        fields = ["name", ]
+
+
+class PositionUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Position
+        fields = ["name", ]
