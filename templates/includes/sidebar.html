@@ -1,13 +1,41 @@
-<ul class="sidebar-nav">
-  {% if user.is_authenticated %}
-{#      <a href="{% url "task_manager:worker_detail" pk=user.id %}">{{ user.username }}</a>#}
-{#    <a href="{% url "logout" %}">Logout</a>#}
-    <li><a href="{% url "task_manager:index" %}">Home page</a></li>
-    <li><a href="{% url "task_manager:workers_list" %}">All workers</a></li>
-    <li><a href="{% url "task_manager:tasks_list" %}">All tasks</a></li>
-{#    <li><a href="{% url "taxi:driver-list" %}">Drivers</a></li>#}
-  {% else %}
-    <a href="{% url "login" %}">Login</a>
-    
+<table class="sidebar" style="border-collapse: collapse; width: 100%; text-align: center;">
+  <tr style="background-color: #f2f2f2;">
+    <td style="padding: 10px; font-weight: bold;">
+      {% if user.is_authenticated %}
+        <a href="{% url "task_manager:update_worker" pk=user.id %}" style="text-decoration: none; color: inherit;">Profile: {{ user.username }}</a>
+      {% endif %}
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding: 10px;">
+      <a href="{% url "task_manager:logout" %}" style="text-decoration: none; color: inherit;">Logout</a>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding: 10px;">
+      <a href="{% url "task_manager:index" %}" style="text-decoration: none; color: inherit;">Home</a>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding: 10px;">
+      <a href="{% url "task_manager:workers_list" %}" style="text-decoration: none; color: inherit;">Workers</a>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding: 10px;">
+      <a href="{% url "task_manager:tasks_list" %}" style="text-decoration: none; color: inherit;">Tasks</a>
+    </td>
+  </tr>
+
+  {% if not user.is_authenticated %}
+    <tr>
+      <td style="padding: 10px;">
+        <a href="{% url "task_manager:login" %}" style="text-decoration: none; color: inherit;">Login</a>
+      </td>
+    </tr>
   {% endif %}
-</ul>
+</table>

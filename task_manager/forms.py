@@ -27,7 +27,13 @@ class WorkerCreateForm(UserCreationForm):
 class WorkerUpdateForm(forms.ModelForm):
     class Meta:
         model = Worker
-        fields = ["position", "email",]
+        fields = [
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "position",
+        ]
 
 
 class TaskSearchForm(forms.Form):
@@ -66,6 +72,7 @@ class TaskUpdateForm(forms.ModelForm):
             "description",
             "deadline",
             "priority",
+            "is_completed",
             "task_type",
             "assignees_list",
         ]

@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <p>You are logged out now</p>
+  <a href="{% url "task_manager:login" %}?next={{ request.path }}">Click here to login</a>
+{% endblock %}
