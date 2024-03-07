@@ -115,6 +115,12 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("task_manager:tasks_list")
     form_class = TaskUpdateForm
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.object.assignees_list.set(form.cleaned_data["assignees_list"])
+
+        return response
+
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task

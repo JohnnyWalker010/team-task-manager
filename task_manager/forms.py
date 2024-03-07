@@ -27,7 +27,7 @@ class WorkerCreateForm(UserCreationForm):
 class WorkerUpdateForm(forms.ModelForm):
     class Meta:
         model = Worker
-        fields = ["position", "email"]
+        fields = ["position", "email",]
 
 
 class TaskSearchForm(forms.Form):
@@ -53,6 +53,12 @@ class TaskCreateForm(forms.ModelForm):
 
 
 class TaskUpdateForm(forms.ModelForm):
+    assignees_list = forms.ModelMultipleChoiceField(
+        queryset=Worker.objects.all(),
+        required=False,
+        widget=forms.CheckboxSelectMultiple,
+    )
+
     class Meta:
         model = Task
         fields = [
@@ -64,3 +70,6 @@ class TaskUpdateForm(forms.ModelForm):
             "assignees_list",
         ]
 
+    def __init__(self, *args, **kwargs):
+        super(TaskUpdateForm, self).__init__(*args, **kwargs)
+        self.fields["assignees_list"].initial = self.instance.assignees_list.all()

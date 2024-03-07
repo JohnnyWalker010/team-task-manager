@@ -15,13 +15,15 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Deadline</th>
-                <th>Is completed</th>
-                <th>Priority</th>
-                <th>Task type</th>
-                <th>Assignees list</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Deadline</th>
+              <th>Is completed</th>
+              <th>Priority</th>
+              <th>Task type</th>
+              <th>Assignees list</th>
+              <th>Update task</th>
+              <th>Delete task</th>
             </tr>
         </thead>
         <tbody>
@@ -33,7 +35,12 @@
                     <td>{{ task.is_completed }}</td>
                     <td>{{ task.priority }}</td>
                     <td>{{ task.task_type }}</td>
-                    <td>{{ task.assignees_list }}</td>
+                    <td>
+                      {% for assignee in task.assignees_list.all %}
+                        {{ assignee.username }}
+                        {% if not forloop.last %}, {% endif %}
+                      {% endfor %}
+                    </td>
                     <td><a href="{% url "task_manager:update_task" pk=task.id %}" class="btn btn-info">Update</a></td>
                     <td><a href="{% url "task_manager:delete_task" pk=task.id %}" class="btn btn-danger">Delete</a></td>
                 </tr>
