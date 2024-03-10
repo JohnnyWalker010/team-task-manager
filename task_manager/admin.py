@@ -12,17 +12,11 @@ class WorkerAdmin(UserAdmin):
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
         (
-            (
-                "Additional info",
-                {
-                    "fields": (
-                        "first_name",
-                        "last_name",
-                        "position",
-                    )
-                },
-            )
-        )
+            "Additional info",
+            {
+                "fields": ("first_name", "last_name", "position"),
+            },
+        ),
     )
 
 
@@ -30,6 +24,7 @@ class WorkerAdmin(UserAdmin):
 class TaskAdmin(admin.ModelAdmin):
     search_fields = ("name", "description")
     list_filter = ("priority", "task_type")
+    list_display = ("name", "description")
 
 
 admin.site.register(TaskType)

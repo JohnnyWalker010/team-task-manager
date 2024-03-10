@@ -16,7 +16,12 @@ from task_manager.forms import (
     WorkerUpdateForm,
     TaskSearchForm,
     TaskCreateForm,
-    TaskUpdateForm, PositionSearchForm, PositionCreateForm, PositionUpdateForm, TaskTypeSearchForm, TaskTypeCreateForm,
+    TaskUpdateForm,
+    PositionSearchForm,
+    PositionCreateForm,
+    PositionUpdateForm,
+    TaskTypeSearchForm,
+    TaskTypeCreateForm,
     TaskTypeUpdateForm,
 )
 from task_manager.models import Worker, Task, TaskType, Position
@@ -218,7 +223,7 @@ class TaskTypeCreateView(LoginRequiredMixin, CreateView):
 
 
 class TaskTypeUpdateView(LoginRequiredMixin, UpdateView):
-    model = Task
+    model = TaskType
     form_class = TaskTypeUpdateForm
     success_url = reverse_lazy("task_manager:positions_list")
     template_name = "task_manager/task_type_update_form.html"
@@ -226,5 +231,5 @@ class TaskTypeUpdateView(LoginRequiredMixin, UpdateView):
 
 class TaskTypeDeleteView(LoginRequiredMixin, DeleteView):
     model = TaskType
-    success_url = reverse_lazy("task_manager:positions_list")
+    success_url = reverse_lazy("task_manager:task_types_list")
     template_name = "task_manager/task_type_delete_form.html"
