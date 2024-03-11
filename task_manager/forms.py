@@ -14,8 +14,14 @@ class WorkerSearchForm(forms.Form):
 
 
 class WorkerCreateForm(UserCreationForm):
+    position = forms.ModelChoiceField(
+        queryset=Position.objects.all(),
+        required=True,
+        label="Position",
+    )
+
     class Meta(UserCreationForm.Meta):
-        model = Worker
+        model = Worker()
         fields = UserCreationForm.Meta.fields + (
             "position",
             "first_name",
@@ -94,13 +100,17 @@ class PositionSearchForm(forms.Form):
 class PositionCreateForm(forms.ModelForm):
     class Meta:
         model = Position
-        fields = ["name", ]
+        fields = [
+            "name",
+        ]
 
 
 class PositionUpdateForm(forms.ModelForm):
     class Meta:
         model = Position
-        fields = ["name", ]
+        fields = [
+            "name",
+        ]
 
 
 class TaskTypeSearchForm(forms.Form):
@@ -115,10 +125,14 @@ class TaskTypeSearchForm(forms.Form):
 class TaskTypeCreateForm(forms.ModelForm):
     class Meta:
         model = TaskType
-        fields = ["name", ]
+        fields = [
+            "name",
+        ]
 
 
 class TaskTypeUpdateForm(forms.ModelForm):
     class Meta:
         model = TaskType
-        fields = ["name", ]
+        fields = [
+            "name",
+        ]
