@@ -24,7 +24,7 @@ from task_manager.forms import (
     TaskTypeCreateForm,
     TaskTypeUpdateForm,
 )
-from task_manager.models import Worker, Task, TaskType, Position
+from task_manager.models import Worker, Task, TaskType, Position, UserVisit
 
 
 @login_required
@@ -35,15 +35,18 @@ def index(request):
     num_task_types = TaskType.objects.count()
     num_positions = Position.objects.count()
 
-    num_visits = request.session.get("num_visits", 0)
-    request.session["num_visits"] = num_visits + 1
+    user_visit, created = UserVisit.objects.get_or_create(user=request.user)
 
+    user_visit.num_visits += 1
+    user_visit.save(
+
+    )
     context = {
         "num_workers": num_workers,
         "num_tasks": num_tasks,
         "num_task_types": num_task_types,
         "num_positions": num_positions,
-        "num_visits": num_visits + 1,
+        "num_visits": user_visit.num_visits
     }
 
     return render(request, "task_manager/index.html", context=context)
