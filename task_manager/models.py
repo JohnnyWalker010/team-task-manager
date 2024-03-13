@@ -53,5 +53,5 @@ class Task(models.Model):
 
 
 class UserVisit(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_visit")
     num_visits = models.PositiveIntegerField(default=0)

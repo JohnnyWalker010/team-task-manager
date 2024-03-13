@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 import os
+import dj_database_url
 from pathlib import Path
+import crispy_forms
+
+from crispy_forms.templatetags import crispy_forms_tags
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -66,6 +70,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "crispy_forms.context_processors.CrispyFormsContext",
             ],
         },
     },
@@ -146,3 +151,8 @@ LOGGING = {
         },
     },
 }
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES["default"].update(db_from_env)
+
+DATABASE_URL = "postgres://ybxfzvgk:yetCcLQqbLG4U2lFRVJJuVo79bE5L6dH@cornelius.db.elephantsql.com/ybxfzvgk"
