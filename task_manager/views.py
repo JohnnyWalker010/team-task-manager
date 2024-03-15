@@ -54,7 +54,6 @@ def index(request):
 
 class WorkerListView(LoginRequiredMixin, ListView):
     model = get_user_model()
-    template_name = "task_manager/worker_list.html"
     paginate_by = 5
     context_object_name = "workers"
 
