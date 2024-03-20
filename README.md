@@ -1,8 +1,11 @@
-# Team task manager
+# Team task manager 
 
 The task manager intended to improve the efficiency of the IT team. It makes tasks' info clear and displays
 who is responsible for each task and what qualification each task performer has. All information
 is easy to add, update, or delete from the database. 
+
+# Check it out!
+[Team task manager project deployed to render](https://team-task-manager-fx2y.onrender.com/)
 
 
 ## Installing / Getting Started
