@@ -27,10 +27,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'RENDER' not in os.environ
+DEBUG = "RENDER" not in os.environ
 
 ALLOWED_HOSTS = [
-    "localhost", "127.0.0.1",
+    "localhost",
+    "127.0.0.1",
 ]
 
 # Application definition
@@ -139,26 +140,5 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 LOGIN_URL = "task_manager:login"
 
 LOGIN_REDIRECT_URL = "/"
-
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "handlers": {
-        "file": {
-            "level": "ERROR",
-            "class": "logging.FileHandler",
-            "filename": "C:/Users/Third/team-task-manager/logs/error.log",
-        },
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["file"],
-            "level": "ERROR",
-            "propagate": True,
-        },
-    },
-}
-
-
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
