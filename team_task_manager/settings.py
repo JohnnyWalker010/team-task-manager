@@ -32,6 +32,7 @@ DEBUG = "RENDER" not in os.environ
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
+    "https://team-task-manager-fx2y.onrender.com",
 ]
 
 # Application definition
