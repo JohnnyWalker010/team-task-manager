@@ -90,8 +90,6 @@ DATABASES = {
     }
 }
 
-DATABASE_URL = "postgres://ybxfzvgk:yetCcLQqbLG4U2lFRVJJuVo79bE5L6dH@cornelius.db.elephantsql.com/ybxfzvgk"
-
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES["default"].update(db_from_env)
 
