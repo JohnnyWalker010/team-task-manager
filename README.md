@@ -15,7 +15,7 @@ The site will be displayed at once after the "python manage.py runserver" comman
 ### Initial Configuration
 
 To get access to all the functionality feel free to use superuser credentials:
-login: admin
+login: superadmin
 password: RogerThat1
 
 
