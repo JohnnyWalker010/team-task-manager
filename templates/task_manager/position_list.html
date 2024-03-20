@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+    <h1>Positions List</h1>
+    <a href="{% url "task_manager:create_position" %}" class="btn btn-success">Create position</a>
+    <form method="get" action="" class="form-inline">
+      {{ search_form|crispy }}
+      <input class="btn btn-info" type="submit" value="🔎">
+    </form>
+
+  {% if positions %}
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+              <th>Name</th>
+              <th>Number of workers</th>
+              <th>Update</th>
+              <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for position in positions %}
+                <tr>
+                    <td>{{ position.name }}</td>
+                    <th>{{ position.worker_set.count }}</th>
+                    <td><a href="{% url "task_manager:update_position" pk=position.id %}" class="btn btn-info">Update</a></td>
+                    <td><a href="{% url "task_manager:delete_position" pk=position.id %}" class="btn btn-danger">Delete</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  {% endif %}
+{% endblock %}

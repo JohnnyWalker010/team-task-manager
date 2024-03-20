@@ -11,23 +11,27 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 import os
+import dj_database_url
 from pathlib import Path
+import crispy_forms
+
+from crispy_forms.templatetags import crispy_forms_tags
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-)!@($pfrryxe_y+xz4$q*=8^wp7599qu56nt2h+up)6jz&k6k!"
+SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    "localhost", "127.0.0.1",
+]
 
 # Application definition
 
@@ -40,10 +44,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "task_manager",
     "crispy_forms",
+    "crispy_bootstrap4",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -72,7 +78,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "team_task_manager.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -83,6 +88,10 @@ DATABASES = {
     }
 }
 
+DATABASE_URL = "postgres://ybxfzvgk:yetCcLQqbLG4U2lFRVJJuVo79bE5L6dH@cornelius.db.elephantsql.com/ybxfzvgk"
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES["default"].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -108,17 +117,17 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Kiev"
 
 USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = "staticfiles/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -129,4 +138,27 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 LOGIN_URL = "task_manager:login"
 
-LOGIN_REDIRECT_URL = "task_manager:index"
+LOGIN_REDIRECT_URL = "/"
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "file": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": "C:/Users/Third/team-task-manager/logs/error.log",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["file"],
+            "level": "ERROR",
+            "propagate": True,
+        },
+    },
+}
+
+
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"

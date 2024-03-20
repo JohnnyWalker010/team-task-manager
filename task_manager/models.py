@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.contrib.auth.models import AbstractUser, Group, Permission, User
 from django.db import models
 
 
@@ -17,7 +17,7 @@ class Worker(AbstractUser):
     )
     groups = models.ManyToManyField(Group, related_name="workers")
     user_permissions = models.ManyToManyField(
-        Permission, related_name="workers_permissions"
+        Permission, related_name="workers"
     )
 
     def __str__(self):
@@ -45,8 +45,13 @@ class Task(models.Model):
     priority = models.CharField(
         max_length=10, default="Ordinary", choices=PRIORITY_CHOICES
     )
-    task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE)
-    assignees_list = models.ManyToManyField(Worker)
+    task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE, related_name="tasks")
+    assignees_list = models.ManyToManyField(Worker, related_name="tasks")
 
     def __str__(self):
         return f"{self.task_type} - {self.name} (Priority: {self.priority})"
+
+
+class UserVisit(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_visits")
+    num_visits = models.PositiveIntegerField(default=0)
