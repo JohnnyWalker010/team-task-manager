@@ -74,7 +74,7 @@ class WorkerListView(LoginRequiredMixin, ListView):
 
 
 class WorkerCreateView(LoginRequiredMixin, CreateView):
-    model = get_user_model()
+    model = Worker
     form_class = WorkerCreateForm
     success_url = reverse_lazy("task_manager:workers_list")
     template_name = "task_manager/worker_create_form.html"
