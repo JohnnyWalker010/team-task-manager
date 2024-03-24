@@ -21,7 +21,7 @@ class WorkerCreateForm(UserCreationForm):
     )
 
     class Meta(UserCreationForm.Meta):
-        model = Worker()
+        model = Worker
         fields = UserCreationForm.Meta.fields + (
             "position",
             "first_name",
