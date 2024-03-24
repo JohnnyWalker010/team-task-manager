@@ -38,9 +38,7 @@ def index(request):
     user_visit, created = UserVisit.objects.get_or_create(user=request.user)
 
     user_visit.num_visits += 1
-    user_visit.save(
-
-    )
+    user_visit.save()
     context = {
         "num_workers": num_workers,
         "num_tasks": num_tasks,
