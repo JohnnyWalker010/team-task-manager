@@ -6,10 +6,8 @@
     <h1>Workers List</h1>
     <a href="{% url "task_manager:create_worker" %}" class="btn btn-success">Add Worker</a>
     <form method="get" action="" class="form-inline">
-      <label>
-        <input type="text" name="search" class="form-control mr-sm-2" placeholder="Search">
-      </label>
-      <button class="btn btn-info" type="submit">🔎</button>
+      {{ search_form|crispy }}
+      <input class="btn btn-info" type="submit" value="🔎">
     </form>
 
   {% if workers %}
@@ -22,7 +20,6 @@
                 <th>Email</th>
                 <th>Position</th>
                 <th>Update</th>
-                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -33,7 +30,6 @@
                     <td>{{ worker.email }}</td>
                     <td>{% if worker.position %}{{ worker.position.name }}{% else %}N/A{% endif %}</td>
                     <td><a href="{% url "task_manager:update_worker" pk=worker.id %}" class="btn btn-info">Update</a></td>
-                    <td><a href="{% url "task_manager:delete_worker" pk=worker.id %}" class="btn btn-danger">Delete</a></td>
                 </tr>
             {% endfor %}
         </tbody>
