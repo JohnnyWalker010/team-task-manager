@@ -209,7 +209,7 @@ class TaskTypeCreateView(LoginRequiredMixin, CreateView):
     model = TaskType
     template_name = "task_manager/task_type_create.html"
     form_class = TaskTypeCreateForm
-    success_url = reverse_lazy("task_manager:task_type_list")
+    success_url = reverse_lazy("task_manager:task_types_list")
 
     def form_valid(self, form):
         form.instance.user = self.request.user

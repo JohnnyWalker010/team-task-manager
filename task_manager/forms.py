@@ -68,7 +68,7 @@ class TaskUpdateForm(forms.ModelForm):
     assignees_list = forms.ModelMultipleChoiceField(
         queryset=Worker.objects.all(),
         required=False,
-        widget=forms.CheckboxSelectMultiple,
+        widget=forms.SelectMultiple(),
     )
 
     class Meta:
