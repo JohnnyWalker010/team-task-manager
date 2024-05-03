@@ -6,7 +6,10 @@
       </li>
 
       <li class="list-group-item">
-        <a href="{% url "task_manager:logout" %}" style="text-decoration: none; color: inherit;">Logout</a>
+        <form action="{% url 'task_manager:logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit" style="background: none; border: none; padding: 0; margin: 0; font: inherit; cursor: pointer; color: inherit;">Logout</button>
+        </form>
       </li>
 
       <li class="list-group-item">
