@@ -25,7 +25,7 @@
             {% for task_type in task_types %}
                 <tr>
                     <td>{{ task_type.name }}</td>
-                    <th>{{ task_type.task_set.count }}</th>
+                    <th>{{ task_type.tasks.count }}</th>
                     <td><a href="{% url "task_manager:update_task_type" pk=task_type.id %}" class="btn btn-info">Update</a></td>
                     <td><a href="{% url "task_manager:delete_task_type" pk=task_type.id %}" class="btn btn-danger">Delete</a></td>
                 </tr>

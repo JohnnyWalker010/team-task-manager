@@ -27,14 +27,14 @@ urlpatterns = [
     path("login/", LoginView.as_view(), name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
     path("workers_list/", WorkerListView.as_view(), name="workers_list"),
-    path("workers_list/create", WorkerCreateView.as_view(), name="create_worker"),
+    path("workers_list/create/", WorkerCreateView.as_view(), name="create_worker"),
     path("workers/<int:pk>/", WorkerUpdateView.as_view(), name="update_worker"),
     path("tasks_list/", TaskListView.as_view(), name="tasks_list"),
-    path("tasks_list/create", TaskCreateView.as_view(), name="create_task"),
-    path("tasks_list/<int:pk>", TaskUpdateView.as_view(), name="update_task"),
-    path("tasks_list/<int:pk>/delete", TaskDeleteView.as_view(), name="delete_task"),
+    path("tasks_list/create/", TaskCreateView.as_view(), name="create_task"),
+    path("tasks_list/<int:pk>/", TaskUpdateView.as_view(), name="update_task"),
+    path("tasks_list/<int:pk>/delete/", TaskDeleteView.as_view(), name="delete_task"),
     path("positions_list/", PositionListView.as_view(), name="positions_list"),
-    path("positions_list/create", PositionCreateView.as_view(), name="create_position"),
+    path("positions_list/create/", PositionCreateView.as_view(), name="create_position"),
     path(
         "positions_list/<int:pk>/update/",
         PositionUpdateView.as_view(),
@@ -47,7 +47,7 @@ urlpatterns = [
     ),
     path("task_types_list/", TaskTypeListView.as_view(), name="task_types_list"),
     path(
-        "task_types_list/create", TaskTypeCreateView.as_view(), name="create_task_type"
+        "task_types_list/create/", TaskTypeCreateView.as_view(), name="create_task_type"
     ),
     path(
         "task_types_list/<int:pk>/update/",

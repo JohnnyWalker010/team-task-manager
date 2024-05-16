@@ -1,3 +1,5 @@
+from datetime import date
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
@@ -62,6 +64,15 @@ class TaskCreateForm(forms.ModelForm):
             "task_type",
             "assignees_list",
         ]
+        widgets = {
+            "deadline": forms.widgets.DateTimeInput(
+                attrs={
+                    "type": "date",
+                    "min": str(date.today()),
+                    "value": str(date.today()),
+                }
+            )
+        }
 
 
 class TaskUpdateForm(forms.ModelForm):
@@ -82,6 +93,16 @@ class TaskUpdateForm(forms.ModelForm):
             "task_type",
             "assignees_list",
         ]
+
+        widgets = {
+            "deadline": forms.widgets.DateTimeInput(
+                attrs={
+                    "type": "date",
+                    "min": str(date.today()),
+                    "value": str(date.today()),
+                }
+            )
+        }
 
     def __init__(self, *args, **kwargs):
         super(TaskUpdateForm, self).__init__(*args, **kwargs)

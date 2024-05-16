@@ -21,7 +21,7 @@ class Worker(AbstractUser):
     )
 
     def __str__(self):
-        return f"{self.username} - ({self.first_name} {self.last_name})"
+        return f"{self.username} - ({self.first_name} {self.last_name}) - {self.position}"
 
 
 class TaskType(models.Model):
